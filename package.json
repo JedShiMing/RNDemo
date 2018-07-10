@@ -1,0 +1,28 @@
+{
+  "name": "UIapp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.2",
+    "react": "16.3.1",
+    "react-native": "0.55.4",
+    "react-native-section-list-get-item-layout": "^2.2.3",
+    "react-native-tableview": "^2.1.1",
+    "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^2.6.2",
+    "teaset": "^0.5.6"
+  },
+  "devDependencies": {
+    "babel-jest": "23.0.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "23.0.0",
+    "react-test-renderer": "16.3.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
