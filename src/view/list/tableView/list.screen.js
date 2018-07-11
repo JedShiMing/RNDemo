@@ -1,5 +1,8 @@
 import React from 'react'
-import { View, Text, StyleSheet, SafeAreaView, SectionList, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
+import TableView from 'react-native-tableview'
+
+const { Section, Item } = TableView
 
 const list2 = [
     { id: '1', title: 'name1', data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] },
@@ -40,62 +43,35 @@ export default class ListScreen extends React.Component {
         })
     }
 
-    renderItems = ({ item, index }) => (
-        <View style={{ height: 50, marginBottom: 5, backgroundColor: 'green' }} key={index}>
-            <Text>{item}</Text>
-        </View>
-    )
-
-    _onPressButton = (code) => {
-        const sectionIndex = this.state.list.findIndex(section => {
-            return section.title === code
-        })
-        console.log('sectionIndex = ', sectionIndex)
-        this.sectionlist.scrollToLocation({
-            animated: false,
-            sectionIndex,
-            itemIndex: 0,
-            viewPosition: 0,
-            viewOffset: 38
-        })
-    }
-
     render() {
         const { list, rightList } = this.state
         console.log('list = ', list)
         console.log('rightList = ', rightList)
-        let rightListEle
-        if (rightList) {
-            rightListEle = rightList.map(
-                (code) => {
-                    return (
-                        <TouchableOpacity activeOpacity={0.8} key={code} onPressIn={() => { this._onPressButton(code) }}>
-                            <Text style={{ backgroundColor: 'yellow' }}>{code}</Text>
-                        </TouchableOpacity>
-                    )
-                }
-            )
-        }
         return (
             <SafeAreaView style={styles._conf}>
                 {
-                    list ? <SectionList
-                        ref={ref => this.sectionlist = ref}
-                        sections={list}
-                        initialNumToRender={10}
-                        renderItem={this.renderItems}
-                        stickySectionHeadersEnabled={true}
-                        decelerationRate={'fast'}
-                        renderSectionHeader={({ section: { id, title } }) => (
-                            <View key={id} style={{ backgroundColor: 'red', height: 30 }}>
-                                <Text style={{ fontWeight: 'bold' }}>{title}</Text>
-                            </View>
-                        )}
-                      /> : null
+                    list ?
+                        <TableView
+                            style={{ flex: 1 }}
+                            tableViewStyle={TableView.Consts.Style.Grouped}
+                            sectionIndexTitlesEnabled
+                            allowsToggle
+                        >
+                            {
+                                list.map(a => <Section label={a.title} canMove headerHeight={30}>
+                                    {
+                                        a.data.map((b, b_index) =>
+                                            <Item key={b_index}>
+                                                {/* <View style={{ backgroundColor: 'green' }} key={b_index}>
+                                                    <Text>{b}</Text>
+                                                </View> */}
+                                                {b}
+                                            </Item>)
+                                    }
+                                </Section>)
+                            }
+                        </TableView> : null
                 }
-                <View style={styles.fixedView}>
-                    {rightListEle}
-                </View>
             </SafeAreaView>
         )
     }
