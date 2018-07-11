@@ -9,7 +9,7 @@ import Test1Screen from './src/view/test1/test1.screen';
 
 export default class App extends React.Component {
     componentWillMount() {
-        console.disableYellowBox = true
+        console.disableYellowBox = false
     }
     render() {
         return <Test1Screen />
