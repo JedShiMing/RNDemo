@@ -30,7 +30,7 @@ export default class Test1Screen extends React.Component {
         const {_posLeft} = this.state
         return (
             <View style={styles.container}>
-                <Button title={'点击出来弹框'} onPress={() => this.showPopView()}/>
+                {/* <Button title={'点击出来弹框'} onPress={() => this.showPopView()}/>
                 <Button title={'点击移动长方形'} onPress={() => {
                     console.log('_postLeft = ', _posLeft._value)
                     if (_posLeft._value >= 400) {
@@ -46,7 +46,8 @@ export default class Test1Screen extends React.Component {
                 <Animated.View
                     style={{backgroundColor: 'green', height: 30,marginTop: 30, position: 'relative', right: _posLeft}}>
                     <Text>hhhhhhhhhhhhhhhhh</Text>
-                </Animated.View>
+                </Animated.View> */}
+                <Text>当前版本0.0.1</Text>
             </View>
         );
     }
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
     welcome: {
