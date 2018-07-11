@@ -5,13 +5,13 @@
  */
 
 import React from 'react'
-import UiDemoApp from './src/navigation';
+import Test1Screen from './src/view/test1/test1.screen';
 
 export default class App extends React.Component {
     componentWillMount() {
         console.disableYellowBox = true
     }
     render() {
-        return <UiDemoApp />
+        return <Test1Screen />
     }
 }

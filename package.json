@@ -10,7 +10,6 @@
     "prop-types": "^15.6.2",
     "react": "16.3.1",
     "react-native": "0.55.4",
-    "react-native-section-list-get-item-layout": "^2.2.3",
     "react-native-tableview": "^2.1.1",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.6.2",
