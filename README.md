@@ -10,5 +10,11 @@ react-native 各种demo
     codepushDemo: 集成codepush热更新的demo
 
     list: 集成有各种list的使用，还有react-native-tableView的使用，有用到react-navigation
+    
+    pay: 支付
+    
+    share: 分享
+    
+    mobx: 集成mobx
 
 }
