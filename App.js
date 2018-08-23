@@ -5,13 +5,17 @@
  */
 
 import React from 'react'
-import Test1Screen from './src/view/test1/test1.screen';
+import { Provider } from 'mobx-react'
+import RootStack from './src/nav'
+import _store from './src/store/init';
 
 export default class App extends React.Component {
     componentWillMount() {
         console.disableYellowBox = true
     }
     render() {
-        return <Test1Screen />
+        return <Provider {..._store}>
+            <RootStack />
+        </Provider>
     }
 }

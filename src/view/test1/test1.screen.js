@@ -1,75 +1,54 @@
 import React from 'react'
 import {
-    Platform,
-    StyleSheet,
     Text,
-    View, Animated
+    View,
+    TextInput,
+    StyleSheet,
 } from 'react-native';
-import {Label, Overlay, Button} from 'teaset'
+import { inject, observer } from 'mobx-react';
 
-const instructions = Platform.select({
-    ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-    android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
+// @observe // 进入观察模式，数据实时变动
+@inject('peopleStore')
+@observer
 export default class Test1Screen extends React.Component {
-    state = {
-        _posLeft: new Animated.Value(0)
-    }
-    _Animated
 
-    componentWillMount() {
-        _Animated = Animated.decay(this.state._posLeft, {
-            toValue: 200,
-        })
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: null,
+            age: 0
+        }
     }
 
     render() {
-        const {_posLeft} = this.state
+        const { username, age } = this.state
+        const { peopleStore } = this.props
+        console.log('props = ', this.props);
+
         return (
             <View style={styles.container}>
-                <Text>欢迎来到dev分支</Text>
-                <Button title={'点击出来弹框'} onPress={() => this.showPopView()}/>
-                <Button title={'点击移动长方形'} onPress={() => {
-                    console.log('_postLeft = ', _posLeft._value)
-                    if (_posLeft._value >= 400) {
-                        Animated.timing(_posLeft, {
-                            toValue: 0,
-                        }).start()
-                    } else {
-                        Animated.timing(_posLeft, {
-                            toValue: 400,
-                        }).start()
-                    }
-                }}/>
-                <Animated.View
-                    style={{backgroundColor: 'green', height: 30,marginTop: 30, position: 'relative', right: _posLeft}}>
-                    <Text>hhhhhhhhhhhhhhhhh</Text>
-                </Animated.View>
+                <Text>欢迎来到mobx实战分支</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                    <Text>请输入名字</Text>
+                    <TextInput
+                        value={username}
+                        style={styles._InputView}
+                        onChangeText={v => peopleStore.setName(v)}
+                    />
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, }}>
+                    <Text>请输入年龄</Text>
+                    <TextInput
+                        value={'' + age}
+                        style={styles._InputView}
+                    />
+                </View>
+                <View>
+                    <Text>你输入的名字是 = {peopleStore._name}</Text>
+                    <Text>{peopleStore.sex}</Text>
+                </View>
             </View>
         );
-    }
-
-    showPopView() {
-        let overlayView = (
-            <Overlay.PopView
-                style={{alignItems: 'center', justifyContent: 'center'}}
-            >
-                <View style={{
-                    backgroundColor: '#fff',
-                    minWidth: 260,
-                    minHeight: 180,
-                    borderRadius: 15,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Label type='title' size='xl' text='Pop Overlay'/>
-                </View>
-            </Overlay.PopView>
-        )
-        Overlay.show(overlayView)
     }
 }
 
@@ -79,14 +58,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#F5FCFF',
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
+    _InputView: {
+        width: 200,
+        height: 30,
+        // backgroundColor: '',
+        paddingLeft: 20,
+        borderRadius: 5,
+        fontSize: 22,
+        borderWidth: 1,
+        marginLeft: 20,
+    }
 });
