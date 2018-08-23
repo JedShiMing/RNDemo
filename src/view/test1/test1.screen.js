@@ -30,6 +30,7 @@ export default class Test1Screen extends React.Component {
         const {_posLeft} = this.state
         return (
             <View style={styles.container}>
+                <Text>欢迎来到dev分支</Text>
                 <Button title={'点击出来弹框'} onPress={() => this.showPopView()}/>
                 <Button title={'点击移动长方形'} onPress={() => {
                     console.log('_postLeft = ', _posLeft._value)
