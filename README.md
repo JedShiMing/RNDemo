@@ -17,4 +17,6 @@ react-native 各种demo
     
     mobx: 集成mobx
 
+    navigation: 路由的练习
+
 }
