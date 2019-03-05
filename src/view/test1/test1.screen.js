@@ -1,92 +1,111 @@
 import React from 'react'
 import {
-    Platform,
     StyleSheet,
     Text,
-    View, Animated
+    View, SafeAreaView
 } from 'react-native';
-import {Label, Overlay, Button} from 'teaset'
-
-const instructions = Platform.select({
-    ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-    android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import { createMaterialTopTabNavigator } from 'react-navigation';
 
 export default class Test1Screen extends React.Component {
-    state = {
-        _posLeft: new Animated.Value(0)
-    }
-    _Animated
-
-    componentWillMount() {
-        _Animated = Animated.decay(this.state._posLeft, {
-            toValue: 200,
-        })
-    }
-
     render() {
-        const {_posLeft} = this.state
         return (
-            <View style={styles.container}>
-                <Text>欢迎来到dev分支</Text>
-                <Button title={'点击出来弹框'} onPress={() => this.showPopView()}/>
-                <Button title={'点击移动长方形'} onPress={() => {
-                    console.log('_postLeft = ', _posLeft._value)
-                    if (_posLeft._value >= 400) {
-                        Animated.timing(_posLeft, {
-                            toValue: 0,
-                        }).start()
-                    } else {
-                        Animated.timing(_posLeft, {
-                            toValue: 400,
-                        }).start()
-                    }
-                }}/>
-                <Animated.View
-                    style={{backgroundColor: 'green', height: 30,marginTop: 30, position: 'relative', right: _posLeft}}>
-                    <Text>hhhhhhhhhhhhhhhhh</Text>
-                </Animated.View>
+            <SafeAreaView style={{ flex: 1 }}>
+                <MaterialTopTabNavigator />
+            </SafeAreaView>
+        )
+    }
+}
+
+class HomeScreen extends React.Component {
+    render() {
+        return (
+            <View style = {styles.container} >
+                <Text>主页</Text> 
             </View>
         );
     }
+}
 
-    showPopView() {
-        let overlayView = (
-            <Overlay.PopView
-                style={{alignItems: 'center', justifyContent: 'center'}}
-            >
-                <View style={{
-                    backgroundColor: '#fff',
-                    minWidth: 260,
-                    minHeight: 180,
-                    borderRadius: 15,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Label type='title' size='xl' text='Pop Overlay'/>
-                </View>
-            </Overlay.PopView>
-        )
-        Overlay.show(overlayView)
+class SettingsScreen extends React.Component {
+    render() {
+        return (
+            <View style={styles.container} >
+                <Text>设置</Text>
+            </View>
+        );
     }
 }
+class ProfileScreen extends React.Component {
+    render() {
+        return (
+            <View style={styles.container} >
+                <Text>个人主页</Text>
+            </View>
+        );
+    }
+}
+class FeedScreen extends React.Component {
+    render() {
+        return (
+            <View style={styles.container} >
+                <Text>反馈</Text>
+            </View>
+        );
+    }
+}
+const MaterialTopTabNavigator = createMaterialTopTabNavigator({
+    Home: {
+        screen: HomeScreen,
+        navigationOptions: {
+            tabBarLabel: '主页',
+        }
+    },
+    Settings: {
+        screen: SettingsScreen,
+        navigationOptions: {
+            tabBarLabel: '设置',
+        }
+    },
+    Profile: {
+        screen: ProfileScreen,
+        navigationOptions: {
+            tabBarLabel: '个人中心',
+        }
+    },
+    Feed: {
+        screen: FeedScreen,
+        navigationOptions: {
+            tabBarLabel: '反馈',
+        }
+    },
+}, {
+        initialRouteName: 'Home',
+        // swipeEnabled: false, // 是否允许滑动切换tabs 默认是true
+        animationEnabled: false, // 点击tab label切换tab时是否开启动画 默认为true
+        // order: ['Settings', 'Home'],
+        // tabBarPosition: 'bottom', // tab bar显示的位置，默认是 'top'
+        // tabBarOptions: {
+        //     activeTintColor: 'orange',
+        //     inactiveTintColor: 'grey',
+        //     style: {
+        //         backgroundColor: '#f2f2f2',
+        //         borderTopWidth: 0.5,
+        //         borderTopColor: 'grey',
+        //     },
+        //     indicatorStyle: {
+        //         height: 0, // 不显示indicator
+        //     },
+        //     showIcon: false, // 是否显示图标, 默认为false
+        //     showLabel: false, // 是否显示label
+        // },
+    });
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
     },
 });
